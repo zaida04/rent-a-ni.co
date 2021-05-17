@@ -1,0 +1,105 @@
+{
+  "name": "rent-a-ni.co",
+  "version": "0.0.1",
+  "description": "Personal link shortening service",
+  "main": "dist/index.js",
+  "private": true,
+  "scripts": {
+    "build": "npx rimraf dist/ && tsc",
+    "lint": "npx eslint src --ext .js,.ts",
+    "lint:fix": "npm run lint -- --fix",
+    "start": "node -r dotenv/config dist/index.js",
+    "dev": "npm run build && npm start",
+    "knex:migrate": "knex --knexfile ./knexfile.ts migrate:latest",
+    "knex:create": "knex --knexfile ./knexfile.ts migrate:make",
+    "knex:rollback": "knex --knexfile ./knexfile.ts migrate:rollback",
+    "deploy": "heroku container:push worker --app=rent-a-nico && heroku container:release worker --app=rent-a-nico"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^12.0.1",
+    "@commitlint/config-angular": "^12.0.1",
+    "@types/node": "^15.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.22.0",
+    "@typescript-eslint/parser": "^4.22.0",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "husky": "^4.3.8",
+    "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "sqlite3": "^5.0.2",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "fastify": "^3.15.1",
+    "knex": "^0.95.5",
+    "nanoid": "^3.1.23",
+    "pg": "^8.6.0",
+    "tslib": "^1.14.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaida04/rent-a-ni.co.git"
+  },
+  "author": "Zaid \"Nico\"",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zaida04/rent-a-ni.co/issues"
+  },
+  "homepage": "https://github.com/zaida04/rent-a-ni.co#readme",
+  "prettier": {
+    "printWidth": 110,
+    "tabWidth": 4,
+    "useTabs": true,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "arrowParens": "always",
+    "proseWrap": "always",
+    "endOfLine": "auto"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "build": "npm run build",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --fix"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-angular"
+    ],
+    "rules": {
+      "scope-case": [
+        2,
+        "always",
+        "pascal-case"
+      ],
+      "type-enum": [
+        2,
+        "always",
+        [
+          "chore",
+          "build",
+          "ci",
+          "docs",
+          "feat",
+          "fix",
+          "perf",
+          "refactor",
+          "revert",
+          "style",
+          "test",
+          "types",
+          "wip"
+        ]
+      ]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+version: '3.7'
+
+services:
+  bot:
+    image: zaid450/rent-a-nico
+    restart: unless-stopped
+    env_file: .env
