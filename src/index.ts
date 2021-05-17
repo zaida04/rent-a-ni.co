@@ -12,7 +12,7 @@ const server = fastify<Server, IncomingMessage, ServerResponse>({
 });
 const database = Util.connectToDB(dbEnvironment[process.env.NODE_ENV ?? 'development']);
 const context: APPLICATION_CONTEXT = {
-	PORT: Number(process.env.PORT),
+	PORT: Number(process.env.PORT) ?? 4000,
 	DATABASE: database
 };
 const homeRouter = home(context);
@@ -23,7 +23,7 @@ server.post('/redirects', RESPONSES.REDIRECT_CREATE, redirectsRouter.post);
 server.get('/redirects/:redirectID', RESPONSES.REDIRECT_GET, redirectsRouter.get);
 server.delete('/redirects/:redirectID', RESPONSES.REDIRECT_DELETE, redirectsRouter.del);
 
-server.listen(context.PORT, (e) => {
+server.listen(context.PORT, '0.0.0.0', (e) => {
 	if (e) throw e;
 	return console.log('Server started!');
 });
