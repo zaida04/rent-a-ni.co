@@ -24,27 +24,20 @@ export const RESPONSES = {
 			}
 		}
 	},
-	REDIRECT_GET: {
-		schema: {
-			body: {
-				type: 'object',
-				properties: {}
-			}
-		}
-	},
 	REDIRECT_CREATE: {
 		schema: {
 			body: {
 				type: 'object',
 				properties: {
 					destination: { type: 'string' }
-				}
+				},
+				required: ['destination']
 			},
 			response: {
 				200: {
 					type: 'object',
 					properties: {
-						shorthand_id: { type: 'string' },
+						nanoId: { type: 'string' },
 						id: { type: 'string' }
 					}
 				}

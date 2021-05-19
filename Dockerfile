@@ -2,7 +2,7 @@ FROM node:14-alpine
 WORKDIR /usr/app
 LABEL name "rent-a-nico service"
 
-COPY package*.json tsconfig.json ./
+COPY package*.json knexfile.js tsconfig.json ./
 RUN npm ci
 COPY src src/
 RUN npm run build

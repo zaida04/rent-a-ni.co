@@ -5,3 +5,5 @@ services:
     image: zaid450/rent-a-nico
     restart: unless-stopped
     env_file: .env
+    ports:
+      - "${PORT}:${PORT}"

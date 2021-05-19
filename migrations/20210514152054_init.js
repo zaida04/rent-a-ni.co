@@ -2,7 +2,7 @@
 exports.up = function(knex) {
     return knex.schema.createTable('links', (table) => {
         table.string("id");
-        table.string("longId");
+        table.string("nanoId");
         table.string("destination");
         table.timestamps(true, true);
 	});
