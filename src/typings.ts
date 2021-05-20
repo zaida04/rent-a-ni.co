@@ -1,11 +1,11 @@
 import { FastifyReply, FastifyRequest, RequestGenericInterface } from 'fastify';
-import { RouteGenericInterface } from 'fastify/types/route';
 import { Server, IncomingMessage, ServerResponse } from 'http';
 import { Knex } from 'knex';
 
 export interface APPLICATION_CONTEXT {
 	PORT: number;
 	DATABASE: Knex;
+	ALLOWED_IP: string;
 }
 
 export interface REDIRECT_GET extends RequestGenericInterface {

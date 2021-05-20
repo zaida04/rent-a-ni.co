@@ -3,5 +3,6 @@ declare namespace NodeJS {
 		DATABASE_URI: string;
 		PORT: string;
 		NODE_ENV?: string;
+		ALLOWED_IP: string;
 	}
 }

@@ -34,6 +34,12 @@ export const RESPONSES = {
 				required: ['destination']
 			},
 			response: {
+				400: {
+					type: 'object',
+					properties: {
+						message: { type: 'string' }
+					}
+				},
 				200: {
 					type: 'object',
 					properties: {

@@ -22,6 +22,10 @@ export default function homeRouter(context: APPLICATION_CONTEXT) {
 			return res.redirect(redirect.destination);
 		},
 		post: async (req: Req<REDIRECT_CREATE>, res: Res<REDIRECT_CREATE>) => {
+			console.log(req.ip);
+			if (!['127.0.0.1', context.ALLOWED_IP].some((x) => x === req.ip))
+				return res.status(403).send({ message: 'You are not Nico!' });
+
 			const { destination } = req.body;
 			const id = v4();
 			const short_id = nanoid(8);
