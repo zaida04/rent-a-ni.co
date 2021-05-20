@@ -6,6 +6,22 @@ export interface APPLICATION_CONTEXT {
 	PORT: number;
 	DATABASE: Knex;
 	ALLOWED_IP: string;
+	JWT_KEY: string;
+}
+
+export interface ACCOUNT_CREATE extends RequestGenericInterface {
+	Body: {
+		email: string;
+		username: string;
+		password: string;
+	};
+}
+
+export interface ACCOUNT_LOGIN extends RequestGenericInterface {
+	Body: {
+		username: string;
+		password: string;
+	};
 }
 
 export interface REDIRECT_GET extends RequestGenericInterface {
@@ -44,6 +60,17 @@ export interface ILink {
 	id: string;
 	nanoId: string;
 	destination: string;
+	created_at: number;
+	updated_at: number;
+}
+
+export interface IUser {
+	id: string;
+	email: string;
+	username: string;
+	password: string;
+	token: string;
+	tokenLastUpdatedAt: string;
 	created_at: number;
 	updated_at: number;
 }

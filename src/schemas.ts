@@ -1,4 +1,63 @@
 export const RESPONSES = {
+	ACCOUNT_LOGIN: {
+		schema: {
+			body: {
+				type: 'object',
+				properties: {
+					username: { type: 'string' },
+					password: { type: 'string' }
+				},
+				required: ['username', 'password']
+			},
+			response: {
+				404: {
+					type: 'object',
+					properties: {
+						message: { type: 'string' }
+					}
+				},
+				401: {
+					type: 'object',
+					properties: {
+						message: { type: 'string' }
+					}
+				},
+				200: {
+					type: 'object',
+					properties: {
+						token: { type: 'string' }
+					}
+				}
+			}
+		}
+	},
+	ACCOUNT_CREATE: {
+		schema: {
+			body: {
+				type: 'object',
+				properties: {
+					email: { type: 'string' },
+					username: { type: 'string' },
+					password: { type: 'string' }
+				},
+				required: ['email', 'username', 'password']
+			},
+			response: {
+				409: {
+					type: 'object',
+					properties: {
+						message: { type: 'string' }
+					}
+				},
+				200: {
+					type: 'object',
+					properties: {
+						token: { type: 'string' }
+					}
+				}
+			}
+		}
+	},
 	HOME: {
 		schema: {
 			response: {
@@ -34,12 +93,6 @@ export const RESPONSES = {
 				required: ['destination']
 			},
 			response: {
-				400: {
-					type: 'object',
-					properties: {
-						message: { type: 'string' }
-					}
-				},
 				200: {
 					type: 'object',
 					properties: {

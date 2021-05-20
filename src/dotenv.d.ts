@@ -4,5 +4,6 @@ declare namespace NodeJS {
 		PORT: string;
 		NODE_ENV?: string;
 		ALLOWED_IP: string;
+		JWT_KEY: string;
 	}
 }
