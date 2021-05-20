@@ -34,13 +34,13 @@ server.register(
 	(router, _opts, done) => {
 		router.get('/', RESPONSES.HOME, homeRouter.get);
 		router.post('/redirects', RESPONSES.REDIRECT_CREATE, redirectsRouter.post);
-		router.delete('/shrt/:nanoId', RESPONSES.REDIRECT_DELETE, redirectsRouter.del);
+		router.delete('/s/:nanoId', RESPONSES.REDIRECT_DELETE, redirectsRouter.del);
 		done();
 	},
 	{ prefix: 'api/v1' }
 );
 
-server.get('/shrt/:nanoId', redirectsRouter.get);
+server.get('/s/:nanoId', redirectsRouter.get);
 
 server.get('/', async (_, res) => {
 	return res.sendFile('index.html');
