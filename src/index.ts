@@ -1,4 +1,4 @@
-['PORT', 'ALLOWED_IP', 'DATABASE_URI'].forEach((envVar) => {
+['PORT', 'ALLOWED_IP', 'DATABASE_URL'].forEach((envVar) => {
 	if (!process.env[envVar]) throw new Error(`Missing env var ${envVar}!`);
 });
 

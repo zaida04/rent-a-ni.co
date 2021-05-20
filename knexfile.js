@@ -7,7 +7,7 @@ process.env.PGSSLMODE="no-verify"
 module.exports = {
 	production: {
 		client: 'postgresql',
-		connection: process.env.DATABASE_URI,
+		connection: process.env.DATABASE_URL,
 		pool: { min: 0, max: 7 },
 		ssl: { rejectUnauthorized: false }
 	},
