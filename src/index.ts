@@ -22,6 +22,13 @@ const context: APPLICATION_CONTEXT = {
 	DATABASE: database,
 	ALLOWED_IP: process.env.ALLOWED_IP
 };
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+server.register(require('fastify-rate-limit'), {
+	max: 5,
+	timeWindow: '1 minute'
+});
+
 server.register(fastifyStatic, {
 	root: join(__dirname, '..', 'public/')
 });
