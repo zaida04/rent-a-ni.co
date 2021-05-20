@@ -41,7 +41,7 @@ server.register(
 	{ prefix: 'api/v1' }
 );
 
-server.get('/', async (_req, res) => {
+server.get('/', async (_, res) => {
 	return res.sendFile('index.html');
 });
 
