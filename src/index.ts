@@ -1,4 +1,4 @@
-const requiredEnvs = ['PORT', 'ALLOWED_IP', 'JWT_KEY'];
+const requiredEnvs = ['PORT', 'JWT_KEY'];
 const development = process.env.NODE_ENV !== 'production';
 
 if (!development) requiredEnvs.push('DATABASE_URL');
