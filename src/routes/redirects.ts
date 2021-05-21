@@ -72,6 +72,8 @@ export default function homeRouter(context: APPLICATION_CONTEXT) {
 					.status(404)
 					.send({ statusCode: 404, error: 'REDIRECT_NOT_FOUND', message: 'redirect not found' });
 
+			await context.DATABASE<ILink>('links').where('id', redirect.id).del();
+
 			return res.status(200).send({
 				id: redirect.id,
 				shorthand_id: redirect.nanoId
