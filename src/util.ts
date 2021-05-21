@@ -11,6 +11,7 @@ export function connectToDB(config: {
 	return knex(config);
 }
 
+// create a JWT created from a string formatted like id::timeitwascreated
 export function createFormattedJWT(
 	{ id, tokenLastUpdatedAt }: { id: string; tokenLastUpdatedAt: Date },
 	JWT_KEY: string
@@ -18,6 +19,7 @@ export function createFormattedJWT(
 	return sign(`${id}::${tokenLastUpdatedAt.toUTCString()}`, JWT_KEY);
 }
 
+// decrypt a JWT into a id::timeitwascreated string, but if token is malformed then it'll return null in appropriate spots
 export function decryptFormattedJWT(
 	token: string,
 	JWT_KEY: string
@@ -36,6 +38,7 @@ export function decryptFormattedJWT(
 	return { id: verifiedID, tokenLastUpdatedAt: verifiedDate };
 }
 
+// check if a request is properly authenticated with Bearer token
 export async function isAuth(
 	req: Req<RequestGenericInterface>,
 	res: Res<RequestGenericInterface>,
@@ -44,7 +47,6 @@ export async function isAuth(
 	const authorizationHeader = req.headers.authorization?.slice(7).trim();
 	if (!authorizationHeader) return [false, 'This route requires authentication!'];
 	const data = decryptFormattedJWT(authorizationHeader, context.JWT_KEY);
-	console.log(data);
 
 	if (!data.id || !data.tokenLastUpdatedAt) return [false, 'Malformed token!'];
 	const user = await context.DATABASE<IUser>('users').where('id', data.id).first();

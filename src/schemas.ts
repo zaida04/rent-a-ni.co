@@ -1,9 +1,18 @@
+/**
+ *
+ * Schemas for serialization/validation of routes,
+ * think of it like types for the routes that specifies what is returned on each status code
+ * or what the body, query params, and headers have to look like
+ *
+ */
+
 export const RESPONSES = {
 	ACCOUNT_LOGIN: {
 		schema: {
 			body: {
 				type: 'object',
 				properties: {
+					// this is where the bodies for POST reqs are validated
 					username: { type: 'string' },
 					password: { type: 'string' }
 				},
@@ -11,18 +20,21 @@ export const RESPONSES = {
 			},
 			response: {
 				404: {
+					// this is what the body response looks like on a 404
 					type: 'object',
 					properties: {
 						message: { type: 'string' }
 					}
 				},
 				401: {
+					// this is what the body response looks like on a 401
 					type: 'object',
 					properties: {
 						message: { type: 'string' }
 					}
 				},
 				200: {
+					// this is what the body response looks like on a 200
 					type: 'object',
 					properties: {
 						token: { type: 'string' }

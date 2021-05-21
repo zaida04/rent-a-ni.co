@@ -9,6 +9,7 @@ export interface APPLICATION_CONTEXT {
 	JWT_KEY: string;
 }
 
+// types for routes
 export interface ACCOUNT_CREATE extends RequestGenericInterface {
 	Body: {
 		email: string;
@@ -56,6 +57,7 @@ export interface REDIRECT_DELETE extends RequestGenericInterface {
 	};
 }
 
+// database link entry
 export interface ILink {
 	id: string;
 	nanoId: string;
@@ -64,6 +66,7 @@ export interface ILink {
 	updated_at: number;
 }
 
+// database user entry
 export interface IUser {
 	id: string;
 	email: string;
@@ -75,7 +78,10 @@ export interface IUser {
 	updated_at: number;
 }
 
+// Request object extendable with a route interface like defined above, that way you have fully typed headers, body, queryparams
 export type Req<T extends RequestGenericInterface> = FastifyRequest<T, Server, IncomingMessage>;
+
+// Response object extendable with a route interface like defined above
 export type Res<T extends RequestGenericInterface> = FastifyReply<
 	Server,
 	IncomingMessage,
