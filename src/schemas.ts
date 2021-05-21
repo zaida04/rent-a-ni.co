@@ -80,6 +80,15 @@ export const RESPONSES = {
 						shorthand_id: { type: 'string' }
 					}
 				}
+			},
+			headers: {
+				type: 'object',
+				properties: {
+					authorization: {
+						type: 'string'
+					}
+				},
+				required: ['authorization']
 			}
 		}
 	},
@@ -100,6 +109,15 @@ export const RESPONSES = {
 						id: { type: 'string' }
 					}
 				}
+			},
+			headers: {
+				type: 'object',
+				properties: {
+					authorization: {
+						type: 'string'
+					}
+				},
+				required: ['authorization']
 			}
 		}
 	}

@@ -36,7 +36,7 @@ export default function homeRouter(context: APPLICATION_CONTEXT) {
 		},
 		login_post: async (req: Req<ACCOUNT_LOGIN>, res: Res<ACCOUNT_LOGIN>) => {
 			const { username, password } = req.body;
-
+			console.log(1);
 			const checkIfUserExists = await context
 				.DATABASE<IUser>('users')
 				.where('username', username)

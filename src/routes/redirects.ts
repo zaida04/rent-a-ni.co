@@ -10,6 +10,7 @@ import type {
 
 import { v4 } from 'uuid';
 import { nanoid } from 'nanoid';
+import { isAuth } from '../util';
 
 export default function homeRouter(context: APPLICATION_CONTEXT) {
 	return {
@@ -22,6 +23,9 @@ export default function homeRouter(context: APPLICATION_CONTEXT) {
 			return res.redirect(redirect.destination);
 		},
 		post: async (req: Req<REDIRECT_CREATE>, res: Res<REDIRECT_CREATE>) => {
+			const authRes = await isAuth(req, res, context);
+			console.log(authRes);
+			if (!authRes[0]) return res.status(401).send({ message: authRes[1] });
 			const { destination } = req.body;
 			const id = v4();
 			const short_id = nanoid(8);
@@ -39,6 +43,8 @@ export default function homeRouter(context: APPLICATION_CONTEXT) {
 			});
 		},
 		del: async (req: Req<REDIRECT_DELETE>, res: Res<REDIRECT_DELETE>) => {
+			const authRes = await isAuth(req, res, context);
+			if (!authRes[0]) return res.status(401).send({ message: authRes[1] });
 			const redirect = await context
 				.DATABASE<ILink>('links')
 				.where({ nanoId: req.params.nanoId })
