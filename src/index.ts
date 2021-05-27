@@ -28,7 +28,7 @@ const database = Util.connectToDB(dbEnvironment[process.env.NODE_ENV ?? 'develop
 
 // data about the application that gets passed around
 const context: APPLICATION_CONTEXT = {
-	PORT: Number(process.env.PORT) ?? 4000,
+	PORT: Number(process.env.PORT),
 	DATABASE: database,
 	ALLOWED_IP: process.env.ALLOWED_IP,
 	JWT_KEY: process.env.JWT_KEY
