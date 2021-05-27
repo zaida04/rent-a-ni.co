@@ -5,6 +5,7 @@ LABEL name "rent-a-nico service"
 COPY package*.json knexfile.js tsconfig.json ./
 RUN npm ci
 COPY src src/
+COPY public public/
 RUN npm run build
 RUN npm prune --production
 
