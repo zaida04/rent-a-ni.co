@@ -1,4 +1,4 @@
-name: Lint Test
+name: Lint and Build
 on: 
   push:
     branches:
@@ -8,7 +8,7 @@ on:
       - main
       
 jobs:
-  lint:
+  lint-and-build:
     runs-on: ubuntu-latest
     steps:
       - name: Clone repo
