@@ -30,30 +30,68 @@ General message about the API
 ### 🔒 `POST /api/v1/redirects`
 Create a short link.  
 ```ts
+Request Body 
 {
     destination: string
 }
 ```
+```ts
+Status 200
+{
+    nanoId: string,
+    id: string
+}
+```
 
 ### 🔒 `DELETE /api/v1/redirects/s/:id`
-Delete a short link  
+Delete a short link 
+
+```ts
+Status 200
+{
+    id: string,
+    shorthand_id: string
+}
+```
 
 ### `POST /api/v1/accounts/`
 Create an account.
+
 ```ts
+Request Body
 {
     email: string,
     username: string,
     password: string
 }
 ```
+```ts
+Status 200
+{
+    token: string
+}
+```
 
 ### `POST /api/v1/accounts/login`
 Login to an account and retrieve the generated token.
+
 ```ts
+Request Body
 {
     username: string,
     password: string
+}
+```
+```ts
+Status 200
+{
+    token: string
+}
+```
+```ts
+Status 401
+{
+    message: string
 }
 ```
 
