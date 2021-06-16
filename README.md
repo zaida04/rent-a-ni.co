@@ -5,7 +5,7 @@
 <p>Link shortener named after the popular "RAG" series.</p>
 <p>
     <a href="https://discord.gg/jf66UUN"><img src="https://img.shields.io/discord/732714723744940032.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2 "></a>
-    <img src="https://github.com/zaida04/rent-a-ni.co/actions/workflows/lint.yml/badge.svg)" alt="Lint and build">
+    <img src="https://github.com/zaida04/rent-a-ni.co/actions/workflows/lint.yml/badge.svg" alt="Lint and build">
     <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License: MIT"></a><br>
     <a href="https://github.com/zaida04/rent-a-ni.co/issues"><img src="https://img.shields.io/github/issues-raw/zaida04/rent-a-ni.co.svg?maxAge=25000" alt="Issues"></a>
     <a href="https://github.com/zaida04/rent-a-ni.co/pulls"><img src="https://img.shields.io/github/issues-pr/zaida04/rent-a-ni.co.svg?style=flat" alt="GitHub pull requests"></a><br>
