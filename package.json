@@ -13,7 +13,8 @@
     "knex:migrate": "knex --knexfile ./knexfile.ts migrate:latest",
     "knex:create": "knex --knexfile ./knexfile.ts migrate:make",
     "knex:rollback": "knex --knexfile ./knexfile.ts migrate:rollback",
-    "deploy": "heroku container:push worker --app=rent-a-nico && heroku container:release worker --app=rent-a-nico"
+    "deploy": "heroku container:push worker --app=rent-a-nico && heroku container:release worker --app=rent-a-nico",
+    "prepare": "npx husky install"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.0.1",
@@ -56,58 +57,5 @@
   "bugs": {
     "url": "https://github.com/zaida04/rent-a-ni.co/issues"
   },
-  "homepage": "https://github.com/zaida04/rent-a-ni.co#readme",
-  "prettier": {
-    "printWidth": 110,
-    "tabWidth": 4,
-    "useTabs": true,
-    "semi": true,
-    "singleQuote": true,
-    "trailingComma": "none",
-    "bracketSpacing": true,
-    "arrowParens": "always",
-    "proseWrap": "always",
-    "endOfLine": "auto"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged",
-      "build": "npm run build",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --fix"
-  },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-angular"
-    ],
-    "rules": {
-      "scope-case": [
-        2,
-        "always",
-        "pascal-case"
-      ],
-      "type-enum": [
-        2,
-        "always",
-        [
-          "chore",
-          "build",
-          "ci",
-          "docs",
-          "feat",
-          "fix",
-          "perf",
-          "refactor",
-          "revert",
-          "style",
-          "test",
-          "types",
-          "wip"
-        ]
-      ]
-    }
-  }
+  "homepage": "https://github.com/zaida04/rent-a-ni.co#readme"
 }
