@@ -21,6 +21,16 @@ module.exports = {
     "@typescript-eslint/restrict-template-expressions": "off",
     "prefer-const": "off",
     "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
-    "@typescript-eslint/explicit-module-boundary-types": "off"
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    'prettier/prettier': [
+      2,
+      {
+          endOfLine: 'auto',
+          printWidth: 150,
+          semi: true,
+          tabWidth: 4,
+          trailingComma: 'all',
+      },
+    ],
   },
 };

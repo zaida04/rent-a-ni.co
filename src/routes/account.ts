@@ -8,93 +8,83 @@
  *
  */
 
-import { APPLICATION_CONTEXT, ACCOUNT_CREATE, ACCOUNT_LOGIN, Req, Res, IUser } from '../typings';
-import { v4 } from 'uuid';
-import bcrypt from 'bcrypt';
-import { createFormattedJWT } from '../util';
+import { APPLICATION_CONTEXT, ACCOUNT_CREATE, ACCOUNT_LOGIN, Req, Res, IUser } from "../typings";
+import { v4 } from "uuid";
+import bcrypt from "bcrypt";
+import { createFormattedJWT } from "../util";
 
 export default function homeRouter(context: APPLICATION_CONTEXT) {
-	return {
-		post: async (req: Req<ACCOUNT_CREATE>, res: Res<ACCOUNT_CREATE>) => {
-			const { email, username, password } = req.body;
+    return {
+        post: async (req: Req<ACCOUNT_CREATE>, res: Res<ACCOUNT_CREATE>) => {
+            const { email, username, password } = req.body;
 
-			// get existing account record
-			const existingAccount = await context
-				.DATABASE<IUser>('users')
-				.where('username', username)
-				.orWhere('email', email)
-				.first();
+            // get existing account record
+            const existingAccount = await context.DATABASE<IUser>("users").where("username", username).orWhere("email", email).first();
 
-			// if account exist, reject
-			if (existingAccount)
-				return res.status(409).send({
-					statusCode: 409,
-					error: 'USER_ALREADY_EXISTS',
-					message: 'User with that email or username already exists!'
-				});
+            // if account exist, reject
+            if (existingAccount)
+                return res.status(409).send({
+                    statusCode: 409,
+                    error: "USER_ALREADY_EXISTS",
+                    message: "User with that email or username already exists!",
+                });
 
-			// user ID
-			const id = v4();
+            // user ID
+            const id = v4();
 
-			// encrypt password
-			const hashedPassword = await bcrypt.hash(password, await bcrypt.genSalt(10));
+            // encrypt password
+            const hashedPassword = await bcrypt.hash(password, await bcrypt.genSalt(10));
 
-			// token creation date
-			const tokenLastUpdatedAt = new Date();
+            // token creation date
+            const tokenLastUpdatedAt = new Date();
 
-			// create the user JWT
-			const token = createFormattedJWT({ id, tokenLastUpdatedAt }, context.JWT_KEY);
+            // create the user JWT
+            const token = createFormattedJWT({ id, tokenLastUpdatedAt }, context.JWT_KEY);
 
-			// insert user into database
-			await context.DATABASE<IUser>('users').insert({
-				id,
-				email,
-				username,
-				password: hashedPassword,
-				token,
-				tokenLastUpdatedAt: tokenLastUpdatedAt.toUTCString()
-			});
+            // insert user into database
+            await context.DATABASE<IUser>("users").insert({
+                id,
+                email,
+                username,
+                password: hashedPassword,
+                token,
+                tokenLastUpdatedAt: tokenLastUpdatedAt.toUTCString(),
+            });
 
-			return res.status(200).send({ token });
-		},
-		login_post: async (req: Req<ACCOUNT_LOGIN>, res: Res<ACCOUNT_LOGIN>) => {
-			const { username, password } = req.body;
+            return res.status(200).send({ token });
+        },
+        login_post: async (req: Req<ACCOUNT_LOGIN>, res: Res<ACCOUNT_LOGIN>) => {
+            const { username, password } = req.body;
 
-			const checkIfUserExists = await context
-				.DATABASE<IUser>('users')
-				.where('username', username)
-				.first();
+            const checkIfUserExists = await context.DATABASE<IUser>("users").where("username", username).first();
 
-			if (!checkIfUserExists)
-				return res.status(404).send({
-					statusCode: 404,
-					error: 'USER_NOT_FOUND',
-					message: 'User with that username does not exist!'
-				});
+            if (!checkIfUserExists)
+                return res.status(404).send({
+                    statusCode: 404,
+                    error: "USER_NOT_FOUND",
+                    message: "User with that username does not exist!",
+                });
 
-			// compare hashed password to supplied password
-			if (!(await bcrypt.compare(password, checkIfUserExists.password)))
-				return res.status(401).send({
-					statusCode: 401,
-					error: 'INCORRECT_PASSWORD',
-					message: 'Invalid username/password!'
-				});
+            // compare hashed password to supplied password
+            if (!(await bcrypt.compare(password, checkIfUserExists.password)))
+                return res.status(401).send({
+                    statusCode: 401,
+                    error: "INCORRECT_PASSWORD",
+                    message: "Invalid username/password!",
+                });
 
-			// token creation date
-			const tokenLastUpdatedAt = new Date();
+            // token creation date
+            const tokenLastUpdatedAt = new Date();
 
-			const token = createFormattedJWT(
-				{ id: checkIfUserExists.id, tokenLastUpdatedAt },
-				context.JWT_KEY
-			);
+            const token = createFormattedJWT({ id: checkIfUserExists.id, tokenLastUpdatedAt }, context.JWT_KEY);
 
-			// update user data with new token and the last updated time
-			await context
-				.DATABASE<IUser>('users')
-				.where('id', checkIfUserExists.id)
-				.update({ token: token, tokenLastUpdatedAt: tokenLastUpdatedAt.toUTCString() });
+            // update user data with new token and the last updated time
+            await context
+                .DATABASE<IUser>("users")
+                .where("id", checkIfUserExists.id)
+                .update({ token: token, tokenLastUpdatedAt: tokenLastUpdatedAt.toUTCString() });
 
-			return res.status(200).send({ token });
-		}
-	};
+            return res.status(200).send({ token });
+        },
+    };
 }
