@@ -24,12 +24,12 @@ Personal link shortening service built with fastify
 - [UUID](https://www.npmjs.com/package/uuid) - Unique ID generator
 
 ## API Routes
-API Routes preceeding with 🔒 require authentication. You authenticate yourself by passing an `Authorization: Bearer <token>` header with your request. You can retrieve a token by [creating an account](https://github.com/zaida04/rent-a-ni.co#post-apiv1accounts) or [logging into an account](https://github.com/zaida04/rent-a-ni.co#post-apiv1accountslogin)
+API Routes suffixed with 🔒 require authentication. You authenticate yourself by passing an `Authorization: Bearer <token>` header with your request. You can retrieve a token by [creating an account](https://github.com/zaida04/rent-a-ni.co#post-apiv1accounts) or [logging into an account](https://github.com/zaida04/rent-a-ni.co#post-apiv1accountslogin)
 
 ### `GET /api/v1/`
 General message about the API
 
-### 🔒 `POST /api/v1/redirects`
+### `POST /api/v1/redirects` 🔒
 Create a short link.  
 ```ts
 Request Body 
@@ -45,7 +45,7 @@ Status 200
 }
 ```
 
-### 🔒 `DELETE /api/v1/redirects/s/:id`
+### `DELETE /api/v1/redirects/s/:id` 🔒
 Delete a short link 
 
 ```ts
